@@ -26,8 +26,16 @@ namespace Services
         }
 
         public void CreateAccount(string accountName, AccountType accountType)
-        // create a new account
+        // create a new account based on the specified account type
         {
+            //AccountBase newAccount = AccountBase.CreateAccount(accountType);
+            //accountsDictionary.Add(accountName, newAccount);
+
+            if (accountsDictionary.ContainsKey(accountName))
+            {
+                throw new InvalidOperationException("An account with this name already exists.");
+            }
+
             AccountBase newAccount = AccountBase.CreateAccount(accountType);
             accountsDictionary.Add(accountName, newAccount);
         }
@@ -55,7 +63,8 @@ namespace Services
         public void Withdrawal(string accountName, decimal amount)
         // withdrawal the given account into the account named
         {
-            throw new NotImplementedException();
+            AccountBase acc = FindAccount(accountName);
+            acc.AddTransaction(-1 * amount);
         }
 
         private AccountBase FindAccount(string accountName)

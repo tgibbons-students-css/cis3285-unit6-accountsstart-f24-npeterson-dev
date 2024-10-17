@@ -11,7 +11,7 @@ namespace Domain
         public static AccountBase CreateAccount(AccountType type)
         {
             AccountBase account = null;
-            switch(type)
+            switch (type)
             {
                 case AccountType.Silver:
                     account = new SilverAccount();
@@ -40,10 +40,14 @@ namespace Domain
 
         public void AddTransaction(decimal amount)
         {
-            RewardPoints += CalculateRewardPoints(amount);
-            Balance += amount;
+            if (amount > 0)
+            {
+                RewardPoints += CalculateRewardPoints(amount);
+            }
+            Balance += amount; 
         }
 
         public abstract int CalculateRewardPoints(decimal amount);
+        
     }
 }

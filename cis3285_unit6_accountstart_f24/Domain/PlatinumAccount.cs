@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Domain
 {
-    internal class PlatinumAccount : AccountBase
+    public class PlatinumAccount : AccountBase
     {
         public override int CalculateRewardPoints(decimal amount)
         {
